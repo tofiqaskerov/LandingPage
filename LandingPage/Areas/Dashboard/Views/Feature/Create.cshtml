@@ -1,0 +1,72 @@
+﻿<style>
+    #icons {
+        color: #000;
+    }
+
+    .myIcon {
+        font-size: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+    }
+</style>
+
+<form method="post" class="mt-5 mb-3">
+    <div class="container">
+        <div class="row">
+            <div class="input-group my-2">
+                <input name="Title" id="title" class="form-control" type="text" placeholder="Title" />
+            </div>
+            <div class="input-group my-2">
+                <input name="Subtitle" id="title" class="form-control" type="text" s placeholder="Subtitle" />
+            </div>
+
+            <div class="input-group my-2">
+                <input name="Icon" id="IcoInput" class="form-control" type="text" placeholder="Icon" />
+            </div>
+            <div id="icons">
+
+                <i iconName=" fa-layer-group" class="myIcon fa-solid fa-layer-group"></i>
+                <i iconName=" fa-terminal" class="myIcon fa-solid fa-terminal"></i>
+                <i iconName=" fa-laptop" class="myIcon fa-solid fa-laptop"></i>
+                <i iconName=" fa-camera" class="myIcon fa-solid fa-camera"></i>
+            </div>
+            <div class="input-group my-2">
+                <h3 style="color:red">@ViewBag.EmptyError </h3>
+            </div>
+
+            <div class="input-group my-2">
+                <input type="submit" class="btn btn-success d-block " value="Create" />
+            </div>
+            <div class="mb-6">
+                <a class="btn btn-success" href="/dashboard/feature">Return Index</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+<script>
+    var icons = document.getElementById("icons")
+     var myIcon = document.querySelectorAll(".myIcon")
+     for(let i=0; i<myIcon.length; i++){
+          myIcon[i].onclick = (e)=>{
+                for(let j =0; j<myIcon.length; j++ ){
+                    myIcon[j].style.color = '#000'
+                }
+                myIcon[i].style.color = 'blue';
+          }
+     }
+
+     let myInput = document.getElementById("IcoInput")
+     $(document).on('click', '.myIcon', function (e) {
+         myInput.value = e.currentTarget.attributes.iconName.value
+
+         //this.style.color = "red"
+         //e.style.color = "red"
+         console.log(e.target)
+     });
+</script>
+

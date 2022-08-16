@@ -1,0 +1,88 @@
+﻿@model Banner
+
+
+@if (Model == null)
+{
+    <div class="container">
+        <a class="btn btn-success mt-5 mb-4 " style=" width: 10%;" href="/dashboard/banner/create">Create</a>
+    </div>
+}
+
+@if (Model != null)
+{
+
+
+    <table class="table table-bordered  table-light mb-5" style="color: #000;">
+        <tr class="table-dark">
+            <th>Id</th>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Action</th>
+
+        </tr>
+
+
+        <tr style="font-weight:500">
+            <td>@Model.Id</td>
+            <td>@Model.Title</td>
+            <td>
+                <img src="~/@Model.PhotoURL" class="img-fluid" style="border-radius: 0px; width: 200px; height: 100px;" />
+            </td>
+            <td>
+                <a href="/dashboard/banner/edit/@Model.Id" class="btn btn-warning btn-md ">Edit</a>
+                <a href="/dashboard/banner/details/@Model.Id" class="btn btn-info btn-md">Detail</a>
+                <a banner-value="@Model.Id" class="btn btnSave btn-danger btn-md">Delete</a>
+            </td>
+        </tr>
+
+
+
+    </table>
+
+}
+else
+{
+    <div class="container">
+        <div class="alert text-center alert-info">Bazada melumat yoxdur</div>
+    </div>
+}
+
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let bannerId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "banner/delete/",
+                    data: {
+                        id: bannerId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "Banner is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "banner"
+                })
+
+            }
+        })
+    })
+</script>
+}
+

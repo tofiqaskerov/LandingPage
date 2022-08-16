@@ -1,0 +1,90 @@
+﻿@model List<Testimonial>
+<style>
+    a{
+        margin-bottom:10px;
+    }
+</style>
+
+@if (ViewBag.testimonialCount < 6)
+{
+    <a class="btn btn-success mt-5 mb-4 " style=" width: 10%;" href="/dashboard/testimonial/create">Create</a>
+}
+
+@if (Model != null)
+{
+    <table class="table table-bordered table-striped table-dark mb-5" style="color: #000;">
+        <tr class="table-light">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Action</th>
+
+        </tr>
+
+        @foreach (var testimonial in Model)
+        {
+            <tr style="font-weight:500; color:#fff;">
+                <td>@testimonial.Id</td>
+                <td>@testimonial.Name</td>
+                <td style="white-space: pre-wrap">@testimonial.Description</td>
+                <td>
+                    <img src="~/@testimonial.PhotoURL" class="img-fluid" style="border-radius: 0px; width: 200px; height: 150px;" />
+                </td>
+                <td>
+                    <a href="/dashboard/testimonial/edit/@testimonial.Id" class="btn btn-warning btn-md ">Edit</a>
+                    <a href="/dashboard/testimonial/details/@testimonial.Id" class="btn btn-info btn-md">Detail</a>
+                    <a portfolio-value="@testimonial.Id" class="btn btnSave btn-danger btn-md">Delete</a>
+                </td>
+            </tr>
+
+        }
+
+    </table>
+}
+else
+{
+    <div class="alert alert-info">Bazada melumat yoxdur</div>
+
+}
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6', 
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let testimonialId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "testimonial/delete/",
+                    data: {
+                        id: testimonialId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "testimonial is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "testimonial"
+                })
+
+            }
+        })
+    })
+</script>
+}
+
+
+

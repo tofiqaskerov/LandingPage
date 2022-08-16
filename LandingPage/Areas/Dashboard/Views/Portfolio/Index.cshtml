@@ -1,0 +1,90 @@
+﻿@model List<Portfolio>
+<style>
+    a{
+        margin-bottom:10px;
+    }
+</style>
+
+@if (ViewBag.portfolioCount < 6)
+{
+    <a class="btn btn-success mt-5 mb-4 " style=" width: 10%;" href="/dashboard/portfolio/create">Create</a>
+}
+
+@if (Model != null)
+{
+    <table class="table table-bordered table-striped table-dark mb-5" style="color: #000;">
+        <tr class="table-light">
+            <th>Id</th>
+            <th>Title</th>
+            <th>Subtitle</th>
+            <th>Image</th>
+            <th>Action</th>
+
+        </tr>
+
+        @foreach (var portfolio in Model)
+        {
+            <tr style="font-weight:500; color:#fff;">
+                <td>@portfolio.Id</td>
+                <td>@portfolio.Title</td>
+                <td style="white-space: pre-wrap">@portfolio.Subtitle</td>
+                <td>
+                    <img src="~/@portfolio.PhotoURL" class="img-fluid" style="border-radius: 0px; width: 200px; height: 100px;" />
+                </td>
+                <td>
+                    <a href="/dashboard/portfolio/edit/@portfolio.Id" class="btn btn-warning btn-md ">Edit</a>
+                    <a href="/dashboard/portfolio/details/@portfolio.Id" class="btn btn-info btn-md">Detail</a>
+                    <a portfolio-value="@portfolio.Id" class="btn btnSave btn-danger btn-md">Delete</a>
+                </td>
+            </tr>
+
+        }
+
+    </table>
+}
+else
+{
+    <div class="alert alert-info">Bazada melumat yoxdur</div>
+
+}
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6', 
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let portfolioId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "portfolio/delete/",
+                    data: {
+                        id: portfolioId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "portfolio is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "portfolio"
+                })
+
+            }
+        })
+    })
+</script>
+}
+
+
+

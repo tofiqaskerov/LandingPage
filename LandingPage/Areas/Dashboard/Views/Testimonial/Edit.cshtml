@@ -1,0 +1,46 @@
+﻿@model Testimonial
+
+
+
+<form enctype="multipart/form-data" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="input-group my-2">
+                <input value="@Model.Name" name="Name" id="title" class="form-control" type="text" placeholder="Name" />
+            </div>
+            <div class="input-group my-2">
+                <input value="@Model.Description" name="Description" id="title"  class="form-control" type="text" placeholder="Description" />
+            </div>
+
+            @ViewBag.PhotoError
+          
+            <div class="input-group my-2">
+                <input name="NewPhoto" accept=".jpg" id="title" class="form-control" type="file" placeholder="PhotoURL" />
+                <br />
+
+                <input type="hidden" name="oldPhoto" value="@Model.PhotoURL" />
+            </div>
+        </div>
+        <div class="input-group my-2">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+                    <img height="200" src="~/@Model.PhotoURL" />
+                </div>
+            </div>
+           
+            
+                 <h3>@ViewBag.EmptyError</h3>
+            
+
+
+        </div>
+        <input type="submit" class="btn btn-primary" value="Save" />
+        <div class="mb-5 mt-3">
+            <a class="btn btn-success" href="/dashboard/testimonial">Return Index</a>
+        </div>
+    </div>
+</form>
+
+
+

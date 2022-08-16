@@ -1,0 +1,78 @@
+﻿@model List<Contact>
+
+@if (Model != null)
+{
+
+
+    <table class="table table-bordered  table-light mb-5" style="color: #000;">
+        <tr class="table-dark">
+            <th>Id</th>
+            <th>Email</th>
+            <th>Action</th>
+
+        </tr>
+
+        @foreach (var contact in Model)
+        {
+            <tr style="font-weight:500">
+
+                <td>@contact.Id</td>
+                <td>@contact.Email</td>
+                <td>
+                    <a banner-value="@contact.Id" class="btn btnSave btn-danger btn-md">Delete</a>
+                </td>
+            </tr>
+        }
+
+
+
+
+    </table>
+
+}
+else
+{
+    <div class="container">
+        <div class="alert text-center alert-info">Bazada melumat yoxdur</div>
+    </div>
+}
+
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let contactId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "contact/delete/",
+                    data: {
+                        id: contactId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "Email is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "contact"
+                })
+
+            }
+        })
+    })
+</script>
+}
+

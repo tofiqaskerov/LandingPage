@@ -1,0 +1,279 @@
+﻿@model HomeVM
+
+@if (Model.Banner != null)
+{
+    <!-- Masthead-->
+    <header style="background: url(@Model.Banner.PhotoURL) no-repeat center  center; background-size: cover;  " class="masthead">
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="text-center text-white">
+                        <!-- Page heading-->
+                    <h1 class="mb-5">@Model.Banner.Title</h1>
+                        <!-- Signup form-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        @*data-sb-form-api-token="API_TOKEN"*@
+                        <form class="form-subscribe" method="post" id="contactForm">
+                            <!-- Email address input-->
+                        <div class="row">
+                                <div class="col">
+                                    <input class="form-control form-control-lg" id="emailAddress" name="Email" type="email" placeholder="Email Address" />
+                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                                </div>
+                                <div class="col-auto"><button class="btn btn-primary btn-lg " id="submitButton" type="submit">Submit</button></div>
+                            </div>
+                            <!-- Submit success message-->
+                            <!---->
+                            <!-- This is what your users will see when the form-->
+                            <!-- has successfully submitted-->
+                        <div class="d-none" id="submitSuccessMessage">
+                                <div class="text-center mb-3">
+                                    <div class="fw-bolder">Form submission successful!</div>
+                                    <p>To activate this form, sign up at</p>
+                                    <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                </div>
+                            </div>
+                            <!-- Submit error message-->
+                            <!---->
+                            <!-- This is what your users will see when there is-->
+                            <!-- an error submitting the form-->
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
+@if (Model.Features != null)
+{
+    <!-- Icons Grid-->
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                @foreach (var feature in Model.Features)
+                {
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="fa-solid @feature.Icon  m-auto text-primary"></i></div>
+                            <h3>@feature.Title</h3>
+                            <p class="lead mb-0">@feature.Subtitle</p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+        </div>
+    </section>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
+
+@if (Model.Portfolios != null)
+{
+    <!-- Image Showcases-->
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            @{
+                int number = 1;
+                foreach (var portfolio in Model.Portfolios)
+                {
+                    <div class="row g-0">
+                        <div class="col-lg-6 @(number%2==0 ? "" : "order-lg-2" )  text-white showcase-img" style="background-image: url(@portfolio.PhotoURL)"></div>
+                        <div class="col-lg-6 @(number%2==0 ? "" : "order-lg-1")  my-auto showcase-text">
+                            <h2>@portfolio.Title</h2>
+                            <p class="lead mb-0">@portfolio.Subtitle</p>
+                        </div>
+                    </div>
+                    number++;
+
+                }
+            }
+
+        </div>
+    </section>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
+
+@if (Model.Testimonials != null)
+{
+    <!-- Testimonials-->
+    <section class="testimonials text-center bg-light">
+        <div class="container">
+            <h2 class="mb-5">What people are saying...</h2>
+            <div class="row">
+                @{
+                    foreach (var testimonial in Model.Testimonials)
+                    {
+                        <div class="col-lg-4">
+                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                                <img class="img-fluid rounded-circle mb-3" src="@testimonial.PhotoURL" alt="..." />
+                                <h5>@testimonial.Name</h5>
+                                <p class="font-weight-light mb-0">"@testimonial.Description"</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+    </section>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
+
+@if (Model.endBanner != null)
+{
+    <!-- Call to Action-->
+    <section style="background: url(@Model.endBanner.PhotoURL) no-repeat center  center; background-size: cover;  " class="call-to-action text-white text-center" id="signup">
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <h2 class="mb-4">@Model.endBanner.Title</h2>
+                    <!-- Signup form-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * SB Forms Contact Form * *-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- This form is pre-integrated with SB Forms.-->
+                    <!-- To make this form functional, sign up at-->
+                    <!-- https://startbootstrap.com/solution/contact-forms-->
+                    <!-- to get an API token!-->
+                <form class="form-subscribe" id="contactFormFooter" method="post">
+                        <!-- Email address input-->
+                    <div class="row">
+                            <div class="col">
+                                <input class="form-control form-control-lg" id="emailAddressBelow" name="Email" type="email" placeholder="Email Address" />
+                                <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">Email Address is required.</div>
+                                <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">Email Address Email is not valid.</div>
+                            </div>
+                            <div class="col-auto"><button class="btn btn-primary btn-lg " id="submitButton2" type="submit">Submit</button></div>
+                        </div>
+                        <!-- Submit success message-->
+                        <!---->
+                        <!-- This is what your users will see when the form-->
+                        <!-- has successfully submitted-->
+                    <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                <p>To activate this form, sign up at</p>
+                                <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
+                        </div>
+                        <!-- Submit error message-->
+                        <!---->
+                        <!-- This is what your users will see when there is-->
+                        <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    let button  = document.getElementById("submitButton")
+    console.log(button)
+    button.onclick = (e) =>{
+        e.preventDefault()
+
+        var FormData = $("#contactForm").serialize();
+
+        console.table(FormData)
+        $.ajax({
+            type: "POST",
+            url: "/Home/AddEmail",
+            data: FormData,
+            success: function(){
+                Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+                )
+            }
+        })
+    }
+</script>
+<script>
+
+    let button2  = document.getElementById("submitButton2")
+    button2.onclick = (e) =>{
+        e.preventDefault()
+
+        var FormDataFooter = $("#contactFormFooter").serialize();
+
+        console.table(FormDataFooter)
+        $.ajax({
+            type: "POST",
+            url: "/Home/AddEmail",
+            data: FormDataFooter,
+            success: function(){
+                Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+                )
+            }
+        })
+    }
+</script>

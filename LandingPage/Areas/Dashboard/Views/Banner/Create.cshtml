@@ -1,0 +1,26 @@
+﻿<form enctype="multipart/form-data" method="post" class="mt-5 mb-3">
+    <div class="container">
+        <div class="row">
+            <div class="input-group my-2">
+                <input name="Title" id="title" class="form-control" type="text" placeholder="Title" />
+            </div>
+            <div class="input-group my-2">
+                <h6 style="color:red; font-weight:600;">@ViewBag.EmptyTitle</h6>
+            </div>
+            <div class="input-group my-2">
+                <input name="NewPhoto" id="title" class="form-control" type="file" accept=".jpg" placeholder="PhotoURL" />
+            </div>
+            <div class="input-group my-2">
+                <h6 style="color:red; font-weight:600;">@ViewBag.EmptyPhoto</h6>
+                <h6 style="color:red; font-weight:600;">@ViewBag.PhotoError</h6>
+            </div>
+            <div class="input-group my-2">
+                <input type="submit" class="btn btn-success" value="Create" />
+            </div>
+            <div class="mb-5">
+                <a class="btn btn-success" href="/dashboard/banner">Return Index</a>
+            </div>
+        </div>
+    </div>
+</form>
+

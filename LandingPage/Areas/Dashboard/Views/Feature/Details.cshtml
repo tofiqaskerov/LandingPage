@@ -1,0 +1,52 @@
+﻿@model Feature
+
+
+<style>
+   
+
+    .myIcon {
+        font-size: 40px;
+        /*margin-right: 40px;*/
+        margin-top: 10px;
+        color:blue;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Details" class="mt-4" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label font-weight-bold">Id</label>
+                    <input asp-for="Id" style="color: #000" value="@Model.Id" class="form-control" disabled />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label font-weight-bold">Title</label>
+                    <input asp-for="Title" style="color: #000"  value="@Model.Title" class="form-control" disabled />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Subtitle" class="control-labeLA font-weight-bold">Subtitle</label>
+                    <input asp-for="Subtitle" style="color: #000" value="@Model.Subtitle" class="form-control" disabled />
+                    <span asp-validation-for="Subtitle" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="Icon" class="control-label font-weight-bold">Icon</label>
+                </div>
+                <div class="form-group">
+                    <i class="myIcon fa-solid @Model.Icon"></i>
+                    <h6 class="mt-2""><em>fa-solid @Model.Icon</em></h6>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a class = "btn btn-success" href="/dashboard/feature">Return Index</a>
+    </div>
+</div>
+
+
